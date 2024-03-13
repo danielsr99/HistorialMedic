@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Daniel Soto/Desktop/HistorialMedic/HistoriaMedica/database/dbhistorial.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1911"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="0" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainPersona"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Persona(
+idPersona INTEGER PRIMARY KEY AUTOINCREMENT,
+nombre VARCHAR(20),
+apellidoPaterno VARCHAR(20),
+apellidoMaterno VARCHAR(20),
+documento INTEGER UNIQUE,
+fechaNacimiento VARCHAR(10),
+edad INTEGER,
+antecedentes VARCHAR(30),
+correo VARCHAR(20),
+pais VARCHAR(20),
+activo INTEGER
+);
+
+CREATE TABLE historiaMedica (
+idHistoriaMedica INTEGER PRIMARY KEY AUTOINCREMENT,
+idPersona INTEGER,
+fechaHistoria VARCHAR (10),
+motivo VARCHAR(20),
+examenAuxiliar VARCHAR (20),
+tratamiento VARCHAR(20),
+detalle VARCHAR(30),
+FOREIGN KEY (idPersona) REFERENCES Persona (idPersona)
+);</sql><current_tab id="0"/></tab_sql></sqlb_project>

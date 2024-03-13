@@ -1,4 +1,5 @@
 import tkinter as tk
+from modelo.pacienteDao import Persona, guardarDatoPaciente
 
 class Frame(tk.Frame):
     def __init__(self,root):
@@ -8,6 +9,8 @@ class Frame(tk.Frame):
         self.pack()
         self.config(bg='#CDD8FF')
         self.camposPaciente()
+        self.deshabilitar()
+        
 
     def camposPaciente(self):
         #LABELS
@@ -43,7 +46,6 @@ class Frame(tk.Frame):
         self.lblCorreo.config(font=('ARIAL',15,'bold'), bg=('#CDD8FF'))
         self.lblCorreo.grid(column=0, row= 7, padx=10, pady=5)
 
-        
         self.lblPais = tk.Label(self, text='Pais: ')
         self.lblPais.config(font=('ARIAL',15,'bold'), bg=('#CDD8FF'))
         self.lblPais.grid(column=0, row= 8, padx=10, pady=5)
@@ -96,19 +98,73 @@ class Frame(tk.Frame):
 
         #Buttons
 
-        self.btnNuevo = tk.Button(self, text='Nuevo')
+        self.btnNuevo = tk.Button(self, text='Nuevo', command=self.habilitar)
         self.btnNuevo.config(width=20, font=('ARIAL', 12, 'bold'),
                             fg='#DAD5D6', bg='#057D00', cursor='hand2',activebackground='#35BD6F')
         self.btnNuevo.grid(column=0 , row=9, padx=10, pady=5)
 
-        self.btnGuardar = tk.Button(self, text='Guardar')
+        self.btnGuardar = tk.Button(self, text='Guardar', command=self.guardarPaciente)
         self.btnGuardar.config(width=20, font=('ARIAL', 12, 'bold'),
                             fg='#DAD5D6', bg='#1658A2', cursor='hand2',activebackground='#5F5F5F')
         self.btnGuardar.grid(column=1 , row=9, padx=10, pady=5)
 
-        self.btnCancelar = tk.Button(self, text='Cancelar')
+        self.btnCancelar = tk.Button(self, text='Cancelar', command=self.deshabilitar)
         self.btnCancelar.config(width=20, font=('ARIAL', 12, 'bold'),
                             fg='#DAD5D6', bg='#EA2B02', cursor='hand2',activebackground='#EC8C77')
         self.btnCancelar.grid(column=2, row=9, padx=10, pady=5)
 
+    def guardarPaciente(self):
+        persona = Persona(
+            self.svNombre.get(),self.svApePaterno.get(),self.svApeMaterno.get(),self.svDocumento.get(),
+            self.svFecNacimiento.get(),self.svEdad.get(),self.svAntecedentes.get(),self.svCorreo.get(),
+            self.svPais.get()
+        )
+        guardarDatoPaciente(persona)
+        self.deshabilitar()
 
+    def habilitar(self):
+            self.svNombre.set('')
+            self.svApePaterno.set('')
+            self.svApeMaterno.set('')
+            self.svDocumento.set('')
+            self.svFecNacimiento.set('')
+            self.svEdad.set('')
+            self.svAntecedentes.set('')
+            self.svCorreo.set('')
+            self.svPais.set('')
+
+            self.entryNombre.config(state='norma')
+            self.entryApePaterno.config(state='normal')
+            self.entryApeMaterno.config(state='normal')
+            self.entryDocumento.config(state='normal')
+            self.entryFecNacimiento.config(state='normal')
+            self.entryEdad.config(state='normal')
+            self.entryAntecedentes.config(state='normal')
+            self.entryCorreo.config(state='normal')
+            self.entryPais.config(state='normal')
+
+            self.btnGuardar.config(state='normal')
+            self.btnCancelar.config(state='normal')
+    def deshabilitar(self):
+            self.svNombre.set('')
+            self.svApePaterno.set('')
+            self.svApeMaterno.set('')
+            self.svDocumento.set('')
+            self.svFecNacimiento.set('')
+            self.svEdad.set('')
+            self.svAntecedentes.set('')
+            self.svCorreo.set('')
+            self.svPais.set('')
+
+            self.entryNombre.config(state='disabled')
+            self.entryApePaterno.config(state='disabled')
+            self.entryApeMaterno.config(state='disabled')
+            self.entryDocumento.config(state='disabled')
+            self.entryFecNacimiento.config(state='disabled')
+            self.entryEdad.config(state='disabled')
+            self.entryAntecedentes.config(state='disabled')
+            self.entryCorreo.config(state='disabled')
+            self.entryPais.config(state='disabled')
+
+            self.btnGuardar.config(state='disabled')
+            self.btnCancelar.config(state='disabled')
